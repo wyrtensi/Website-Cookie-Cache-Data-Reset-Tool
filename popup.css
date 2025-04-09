@@ -1,0 +1,544 @@
+/* === Billion Dollar Design Refresh === */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    /* Refined Color Palette */
+    --bg-gradient: linear-gradient(170deg, #1f1f23, #121212 60%);
+    --surface-color: rgba(38, 38, 42, 0.7); /* Semi-transparent surface */
+    --surface-hover: rgba(48, 48, 52, 0.8);
+    --primary-gradient: linear-gradient(45deg, #007aff, #005ecb);
+    --primary-gradient-hover: linear-gradient(45deg, #0a84ff, #006ae5);
+    --secondary-accent: #3a3a3c;
+    --secondary-accent-hover: #48484a;
+    --border-color: rgba(80, 80, 85, 0.5); /* Softer border */
+    --text-primary: #f5f5f7; /* Brighter primary text */
+    --text-secondary: #a1a1a6; /* Adjusted secondary */
+    --text-placeholder: #7d7d81;
+    --error-color: #ff453a;
+    --success-color: #30d158;
+    --warning-color: #ff9f0a;
+    --status-dot-size: 8px;
+    --icon-color: var(--text-secondary);
+    --icon-color-active: var(--text-primary);
+
+    /* Typography */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-size-base: 14px;
+    --font-size-sm: 12px;
+    --font-size-lg: 16px;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /* Spacing & Radius */
+    --spacing-unit: 8px;
+    --popup-width: 370px; /* Slightly wider */
+    --border-radius-sm: 5px;
+    --border-radius-md: 10px;
+    --border-radius-lg: 14px;
+
+    /* Transitions & Animations */
+    --transition-fast: 180ms cubic-bezier(0.25, 0.1, 0.25, 1);
+    --transition-med: 300ms cubic-bezier(0.25, 0.1, 0.25, 1);
+    --transition-slow: 450ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Base Styles */
+body {
+    font-family: var(--font-family);
+    background: var(--bg-gradient);
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-regular);
+    margin: 0;
+    padding: 0;
+    width: var(--popup-width);
+    overflow: hidden;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05); /* Deeper shadow + subtle edge highlight */
+    border: none; /* Remove border, rely on shadow/highlight */
+    backdrop-filter: blur(12px) saturate(150%); /* Glassmorphism */
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    box-sizing: border-box;
+}
+
+/* Apply gradient overlay for better text contrast on glass */
+body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(18, 18, 18, 0.5), rgba(18, 18, 18, 0.8));
+    z-index: -1;
+     border-radius: inherit;
+}
+
+
+.container {
+    padding: calc(var(--spacing-unit) * 3); /* 24px */
+    box-sizing: border-box;
+    position: relative; /* Ensure content is above ::before pseudo-element */
+    z-index: 1;
+}
+
+/* Icon Base Style */
+[class^="icon-"] svg,
+[class*=" icon-"] svg {
+    display: block; /* Remove extra space below SVG */
+    width: 1em; /* Control size via font-size */
+    height: 1em;
+    fill: currentColor; /* Inherit color */
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: calc(var(--spacing-unit) * 3.5); /* 28px */
+    padding-bottom: calc(var(--spacing-unit) * 1.5); /* 12px */
+    border-bottom: 1px solid var(--border-color);
+}
+
+header h1 {
+    font-size: var(--font-size-lg);
+    color: var(--text-primary);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: -0.2px; /* Subtle tightening */
+}
+
+/* Comment out or remove old header icon style */
+/* header .header-icon {
+    font-size: 1.3rem;
+    color: var(--primary-accent);
+    filter: drop-shadow(0 1px 2px rgba(0, 122, 255, 0.3));
+} */
+
+/* New Emoji Button Style */
+.header-emoji-btn {
+    background: none;
+    border: none;
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    font-size: 1.8rem; /* Larger emoji size */
+    line-height: 1; /* Ensure proper vertical alignment */
+    cursor: pointer;
+    color: inherit; /* Needed for filter */
+    filter: saturate(1.3); /* Slightly enhance color */
+    transition: transform var(--transition-fast);
+    transform-origin: center; /* Ensure transforms originate from center */
+}
+
+.header-emoji-btn:hover {
+    transform: scale(1.15); /* Scale up on hover */
+}
+
+.header-emoji-btn:active {
+    transform: scale(1.05); /* Slightly smaller scale when pressed */
+}
+
+/* Add wobble animation */
+.wobble {
+    animation: wobble-animation 0.8s ease-in-out;
+}
+
+@keyframes wobble-animation {
+  0% { transform: translate(0, 0) rotate(0); }
+  15% { transform: translate(-2px, -1px) rotate(-5deg); }
+  30% { transform: translate(1px, -1px) rotate(3deg); }
+  45% { transform: translate(-1px, 1px) rotate(-3deg); }
+  60% { transform: translate(1px, 1px) rotate(2deg); }
+  75% { transform: translate(-1px, -1px) rotate(-1deg); }
+  100% { transform: translate(0, 0) rotate(0); }
+}
+
+/* Section Styling */
+main section {
+    margin-bottom: calc(var(--spacing-unit) * 3.5); /* 28px */
+}
+main section:last-of-type {
+    margin-bottom: 0;
+}
+
+main h2 {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: calc(var(--spacing-unit) * 1.5); /* 12px */
+}
+
+/* Input Group */
+.input-group {
+    display: flex;
+    gap: var(--spacing-unit);
+    margin-bottom: var(--spacing-unit);
+}
+
+#domainInput {
+    flex-grow: 1;
+    padding: calc(var(--spacing-unit) * 1.3) calc(var(--spacing-unit) * 1.8); /* ~10px 14px */
+    border: 1px solid var(--border-color);
+    background-color: var(--surface-color);
+    color: var(--text-primary);
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-base);
+    outline: none;
+    transition: border-color var(--transition-med), box-shadow var(--transition-med), background-color var(--transition-med);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+}
+
+#domainInput:focus {
+    background-color: var(--surface-hover);
+    border-color: var(--primary-accent);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.2), 0 0 0 3px rgba(0, 122, 255, 0.4);
+}
+
+#domainInput::placeholder {
+    color: var(--text-placeholder);
+    opacity: 1;
+}
+
+/* Buttons (General) */
+button {
+    display: inline-flex; /* Align icon and text */
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--spacing-unit) * 0.8); /* 6px gap */
+    padding: calc(var(--spacing-unit) * 1.2) calc(var(--spacing-unit) * 2); /* ~10px 16px */
+    border: none;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold); /* Bolder buttons */
+    transition: all var(--transition-fast);
+    outline: none;
+    position: relative; /* For potential pseudo-elements/effects */
+    overflow: hidden; /* For ripple effects */
+    -webkit-tap-highlight-color: transparent; /* Remove mobile tap highlight */
+}
+button:focus-visible {
+     box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.5);
+}
+
+/* Primary Button (Add) */
+#addDomainBtn {
+    background: var(--primary-gradient);
+    color: white;
+    flex-shrink: 0;
+    box-shadow: 0 3px 8px rgba(0, 100, 200, 0.25), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+#addDomainBtn:hover {
+    background: var(--primary-gradient-hover);
+    box-shadow: 0 4px 12px rgba(0, 100, 200, 0.35), inset 0 1px 0 rgba(255,255,255,0.1);
+    transform: translateY(-1px); /* Subtle lift */
+}
+#addDomainBtn:active {
+    transform: translateY(0px) scale(0.98); /* Press down */
+    box-shadow: 0 1px 3px rgba(0, 100, 200, 0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+#addDomainBtn .icon-add {
+     font-size: 1.1rem; /* Control icon size */
+}
+#addDomainBtn:disabled {
+    background: var(--secondary-accent);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    opacity: 0.6;
+}
+
+/* Error Message */
+.error-message {
+    color: var(--error-color);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    margin-top: calc(var(--spacing-unit) * 0.75); /* 6px */
+    min-height: 1.4em;
+    display: none;
+    text-align: left;
+    filter: drop-shadow(0 1px 1px rgba(255, 69, 58, 0.3)); /* Subtle glow */
+}
+
+/* Domain Manager List Container */
+.list-container {
+    position: relative;
+     border: 1px solid var(--border-color);
+     border-radius: var(--border-radius-md);
+     background-color: var(--surface-color);
+     box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+     margin-bottom: var(--spacing-unit); /* Gap before Reset All */
+     max-height: 180px; /* Adjust height */
+     overflow: hidden; /* Needed for scroll clipping, but not fade */
+}
+
+#domainList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 180px; /* Match container */
+    overflow-y: auto;
+    /* Remove border/bg, handled by container */
+
+    /* --- Add these rules to hide the scrollbar --- */
+    &::-webkit-scrollbar {
+        width: 0px; /* Make scrollbar invisible */
+        background: transparent; /* Optional: just in case */
+    }
+    /* Hide scrollbar track (redundant with width: 0, but good practice) */
+     &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    /* Hide scrollbar thumb (redundant with width: 0, but good practice) */
+     &::-webkit-scrollbar-thumb {
+        background: transparent;
+    }
+    /* Firefox scrollbar hiding (less direct, standard way preferred if possible) */
+    scrollbar-width: none; /* Standard way for Firefox */
+    /* --- End of added rules --- */
+}
+
+/* List Item */
+#domainList li {
+    display: flex;
+    align-items: center;
+    padding: calc(var(--spacing-unit) * 1.2) calc(var(--spacing-unit) * 1.8); /* ~10px 14px */
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    gap: calc(var(--spacing-unit) * 1.5); /* 12px gap */
+    position: relative; /* For potential effects */
+}
+#domainList li:last-child {
+    border-bottom: none;
+}
+#domainList li:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+    transform: translateX(3px); /* Subtle shift on hover */
+}
+
+/* List Item Entry Animation */
+.domain-item-enter {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity var(--transition-med), transform var(--transition-med);
+}
+
+
+/* Domain Name Text */
+#domainList .domain-name {
+    flex-grow: 1;
+    margin-right: var(--spacing-unit);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+/* Status Indicator */
+#domainList .status-indicator {
+    width: var(--status-dot-size);
+    height: var(--status-dot-size);
+    border-radius: 50%;
+    background-color: var(--text-secondary);
+    flex-shrink: 0;
+    transition: all var(--transition-med);
+    box-shadow: inset 0 0 2px rgba(0,0,0,0.4); /* Subtle inner shadow */
+    position: relative;
+}
+/* Animated pulse for presence */
+#domainList .status-indicator.present::before {
+    content: '';
+    position: absolute;
+    inset: -4px; /* Expand around dot */
+    border-radius: 50%;
+    background-color: var(--success-color);
+    opacity: 0.3;
+    animation: pulse 2s infinite ease-out;
+    z-index: -1;
+}
+#domainList .status-indicator.present {
+    background-color: var(--success-color);
+    box-shadow: 0 0 7px rgba(48, 209, 88, 0.7), inset 0 0 1px rgba(255,255,255,0.3);
+}
+#domainList .status-indicator.absent {
+    background-color: var(--error-color);
+     box-shadow: 0 0 7px rgba(255, 69, 58, 0.6), inset 0 0 1px rgba(255,255,255,0.2);
+}
+#domainList .status-indicator.error-state {
+     background-color: var(--warning-color);
+     box-shadow: 0 0 7px rgba(255, 159, 10, 0.6), inset 0 0 1px rgba(255,255,255,0.2);
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.8); opacity: 0.3; }
+    70% { transform: scale(1.5); opacity: 0; }
+    100% { transform: scale(0.8); opacity: 0; }
+}
+
+
+/* Domain Action Buttons */
+#domainList .domain-actions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: calc(var(--spacing-unit) * 1); /* 8px gap */
+}
+
+.action-button { /* Style individual action buttons */
+    background: none;
+    border: none;
+    color: var(--icon-color);
+    cursor: pointer;
+    padding: var(--spacing-unit); /* 8px square-ish area */
+    font-size: 1rem; /* Icon size control */
+    transition: all var(--transition-fast);
+    line-height: 1;
+    border-radius: var(--border-radius-sm);
+}
+.action-button:hover {
+    color: var(--icon-color-active); /* Brighter icon */
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle background */
+    transform: scale(1.1); /* Slightly enlarge */
+}
+.action-button:active {
+    transform: scale(0.95); /* Press down */
+    background-color: rgba(255, 255, 255, 0.05);
+}
+.action-button:disabled {
+    color: var(--secondary-accent);
+    background: none;
+    cursor: not-allowed;
+    transform: none;
+    opacity: 0.5;
+}
+
+/* Empty List Placeholder */
+.no-domains {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    text-align: center;
+    padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 2); /* 32px 16px */
+    opacity: 0.7;
+}
+
+/* Reset All Button */
+button.reset-all {
+    display: flex; /* Align icon properly */
+    width: 100%;
+    margin-top: calc(var(--spacing-unit) * 2); /* 16px */
+    padding: calc(var(--spacing-unit) * 1.3) calc(var(--spacing-unit) * 2); /* ~10px 16px */
+    background-color: var(--secondary-accent);
+    color: var(--text-primary);
+    font-weight: var(--font-weight-medium); /* Less bold than primary */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+button.reset-all:hover {
+     background-color: var(--secondary-accent-hover);
+     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255,255,255,0.05);
+     transform: translateY(-1px);
+}
+button.reset-all:active {
+     background-color: #2c2c2e; /* Darker active */
+     transform: translateY(0px) scale(0.99);
+     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+button.reset-all .icon-reset-all {
+    font-size: 1rem; /* Icon size */
+    color: var(--text-secondary); /* Subtle icon color */
+}
+button.reset-all:hover .icon-reset-all {
+    color: var(--text-primary);
+}
+button.reset-all:disabled {
+    background-color: #2a2a2c;
+    color: var(--text-secondary);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    opacity: 0.6;
+}
+button.reset-all:disabled .icon-reset-all {
+    color: var(--secondary-accent);
+}
+
+
+/* Footer */
+footer {
+    margin-top: calc(var(--spacing-unit) * 3); /* 24px */
+    padding-top: calc(var(--spacing-unit) * 1.5); /* 12px */
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+footer .developer-name {
+    font-weight: var(--font-weight-semibold); /* Bolder name */
+    color: inherit;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(18, 18, 18, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+    backdrop-filter: blur(5px); /* Blur only on loading */
+    -webkit-backdrop-filter: blur(5px);
+    transition: opacity var(--transition-med);
+    opacity: 0;
+}
+.loading-overlay.visible {
+    display: flex;
+    opacity: 1;
+}
+
+.spinner {
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-left-color: var(--primary-accent);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    animation: spin 0.9s cubic-bezier(0.6, 0.2, 0.4, 0.8) infinite;
+    margin-bottom: calc(var(--spacing-unit) * 1.5); /* 12px */
+}
+
+#loading-text {
+    color: var(--text-secondary);
+    font-size: var(--font-size-base); /* Slightly larger loading text */
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.3px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Feedback Animations */
+@keyframes flash-base {
+  0%, 100% { background-color: transparent; }
+  50% { background-color: var(--flash-color); }
+}
+
+.flash-success {
+    --flash-color: rgba(48, 209, 88, 0.15); /* Success */
+    animation: flash-base 1.5s ease-in-out;
+}
+.flash-error {
+    --flash-color: rgba(255, 69, 58, 0.15); /* Error */
+    animation: flash-base 1.5s ease-in-out;
+}
+.flash-warning {
+    --flash-color: rgba(255, 159, 10, 0.15); /* Warning */
+    animation: flash-base 1.5s ease-in-out;
+} 
