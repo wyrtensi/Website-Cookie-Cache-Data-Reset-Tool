@@ -1,7 +1,6 @@
 # Website Cookie, Cache & Data Reset Tool 🍪
 
 ![Screenshot Placeholder](placeholder.png "Extension Popup Screenshot")
-*(Replace placeholder.png with an actual screenshot of your extension popup)*
 
 A modern Chrome extension to easily manage and clear cookies, cache, and other site data for specific websites without affecting your entire browser data. Built with Manifest V3.
 
