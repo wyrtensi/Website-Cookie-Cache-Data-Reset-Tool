@@ -39,7 +39,7 @@ Currently, this extension is not on the Chrome Web Store. To install it locally:
 
 ## Developer
 
-Created by [wyrtensi](https://github.com/wyrtensi) *(Link to your GitHub profile if desired)*
+Created by [wyrtensi](https://github.com/wyrtensi) 
 
 ## License
 
