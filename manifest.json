@@ -6,8 +6,7 @@
   "permissions": [
     "storage",        // To store the list of domains
     "cookies",        // To read and remove cookies
-    "browsingData",   // To clear cache and other site data
-    "activeTab"       // Potentially useful later, good to have
+    "browsingData"   // To clear cache and other site data
   ],
   "host_permissions": [
     "<all_urls>"      // Required for chrome.cookies.get/getAll/remove on arbitrary domains and browsingData removal by origin
@@ -19,7 +18,7 @@
       "48": "icons/icon48.png",
       "128": "icons/icon128.png"
     },
-    "default_title": "Cookie and Cache Reset"
+    "default_title": "Website Cookie, Cache & Data Reset Tool"
   },
   "background": {
     "service_worker": "background.js"
