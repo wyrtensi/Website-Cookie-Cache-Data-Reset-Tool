@@ -19,7 +19,7 @@ A modern Chrome extension to easily manage and clear cookies, cache, and other s
 Currently, this extension is not on the Chrome Web Store. To install it locally:
 
 1.  **Download or Clone:** Get the extension files onto your computer.
-2.  **Open Chrome/Edge Extensions:** Navigate to `chrome://extensions` in Chrome or `edge://extensions` in Edge.
+2.  **Open Chrome/Edge/Opera Extensions:** Navigate to `chrome://extensions` in Chrome or `edge://extensions` in Edge, or `opera://extensions` in Opera.
 3.  **Enable Developer Mode:** Toggle the "Developer mode" switch, usually found in the top-right corner.
 4.  **Load Unpacked:** Click the "Load unpacked" button.
 5.  **Select Folder:** Browse to and select the directory containing the extension's files (the folder with `manifest.json` inside).
